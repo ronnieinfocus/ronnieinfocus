@@ -2081,6 +2081,14 @@
        on every device / content height.
     ───────────────────────────────────────────── */
     function showPage(name) {
+      // If hero has been seen but runway isn't locked yet, lock it now.
+      // Handles the case where user clicks a nav button before scrolling
+      // all the way to 99% — prevents the empty space above the portfolio.
+      const htmlEl = document.documentElement;
+      if (htmlEl.classList.contains('hero-done') && !htmlEl.classList.contains('hero-locked')) {
+        htmlEl.classList.add('hero-locked');
+      }
+
       // Capture role context BEFORE any header state change
       const header  = document.querySelector('.site-header');
       const isFilm  = header?.classList.contains('hdr-dark');
