@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Netlify config — Ronnie In Focus
+# ─────────────────────────────────────────────────────────────────────────────
+
+[build]
+  publish = "."
+
+# Enable Netlify Identity for the CMS login
+[template.environment]
+  NETLIFY_GRAPH_PERSISTED_QUERIES_FILE = "./netlify/persisted-queries.json"
+
+# Security headers for the admin panel
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "same-origin"
+
+# Cache images aggressively (they're content-addressed by filename)
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

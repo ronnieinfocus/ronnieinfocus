@@ -1,0 +1,118 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Decap CMS config — Ronnie In Focus
+#
+# SETUP: Replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME below with
+# the actual values from your GitHub repo URL.
+# Example: if your repo is github.com/ronniesmith/ronnieinfocus
+#   repo: ronniesmith/ronnieinfocus
+# ─────────────────────────────────────────────────────────────────────────────
+
+backend:
+  name: github
+  repo: ronnieinfocus/ronnieinfocus
+  branch: main
+
+# Where uploaded images are stored in the repo
+media_folder: images
+
+# How image URLs appear in the saved JSON (relative to site root)
+public_folder: /images
+
+# ─────────────────────────────────────────────────────────────────────────────
+# COLLECTIONS
+# ─────────────────────────────────────────────────────────────────────────────
+
+collections:
+
+  # ── PHOTO GALLERY ──────────────────────────────────────────────────────────
+  - name: gallery
+    label: Photo Gallery
+    files:
+      - name: photos
+        label: Photos
+        file: data/gallery.json
+        fields:
+          - label: Photos
+            name: photos
+            widget: list
+            summary: "{{fields.category}} — {{fields.caption}}"
+            fields:
+              - label: Photo
+                name: image
+                widget: image
+                hint: Drag & drop or click to upload. JPG or WebP recommended.
+
+              - label: Category
+                name: category
+                widget: select
+                options:
+                  - { label: Portrait,  value: portrait }
+                  - { label: Gym,       value: gym      }
+                  - { label: Event,     value: event    }
+                  - { label: BTS,       value: bts      }
+                  - { label: Street,    value: street   }
+
+              - label: Caption
+                name: caption
+                widget: string
+                required: false
+                hint: Optional — shows on hover in the gallery.
+
+              - label: Height (px)
+                name: height
+                widget: number
+                default: 320
+                value_type: int
+                hint: Controls the card height in the masonry grid. Try 280–480.
+
+  # ── FILM GALLERY ───────────────────────────────────────────────────────────
+  - name: films
+    label: Film Gallery
+    files:
+      - name: videos
+        label: Videos
+        file: data/videos.json
+        fields:
+          - label: Videos
+            name: videos
+            widget: list
+            summary: "{{fields.type}} — {{fields.title}}"
+            fields:
+              - label: Embed URL
+                name: url
+                widget: string
+                hint: >
+                  YouTube: https://www.youtube.com/embed/VIDEO_ID
+                  Vimeo:   https://player.vimeo.com/video/VIDEO_ID
+                  Get VIDEO_ID from the share URL of your video.
+
+              - label: Type
+                name: type
+                widget: select
+                options:
+                  - Reel
+                  - Brand Film
+                  - Cinematography
+                  - Documentary
+                  - Church
+                  - BTS
+
+              - label: Title
+                name: title
+                widget: string
+
+  # ── SITE SETTINGS ──────────────────────────────────────────────────────────
+  - name: settings
+    label: Site Settings
+    files:
+      - name: site
+        label: Site Settings
+        file: data/settings.json
+        fields:
+          - label: Availability Status
+            name: availability
+            widget: string
+            default: Available
+            hint: >
+              Set to "Available" for a green dot.
+              Any other text (e.g. "Fully booked") shows an amber dot.
