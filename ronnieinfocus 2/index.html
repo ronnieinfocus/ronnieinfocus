@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ═══════════════════════════════════════════════
+       META — SEO, Social, Mobile
+  ═══════════════════════════════════════════════ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- Primary SEO -->
+  <title>RonnieinFocus — Photographer &amp; Cinematographer</title>
+  <meta name="description"
+    content="RonnieinFocus — photography and cinematography. Portraits, events, brand films, and more. Booking now." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ronnieinfocus.com/" />
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="RonnieinFocus — Photographer &amp; Cinematographer" />
+  <meta property="og:description" content="Photography and cinematography. Portraits, events, brand films, and more." />
+  <meta property="og:url"         content="https://ronnieinfocus.com/" />
+  <meta property="og:image"       content="https://ronnieinfocus.com/og-image.jpg" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="RonnieinFocus" />
+  <meta name="twitter:description" content="Photography and cinematography." />
+  <meta name="twitter:image"       content="https://ronnieinfocus.com/og-image.jpg" />
+  <!-- Browser / PWA -->
+  <meta name="theme-color" content="#0E0E0E" />
+  <meta name="color-scheme" content="dark light" />
+  <!-- ─── FONTS ─────────────────────────────────────
+       Bebas Neue  — display / name / headings
+       DM Sans     — body, nav, UI, form
+       Cormorant Garamond — italic accent only
+  ───────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=block" rel="stylesheet" />
+  <!-- ─── JSON-LD STRUCTURED DATA ─────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "RonnieinFocus",
+    "jobTitle": "Photographer and Cinematographer",
+    "url": "https://ronnieinfocus.com",
+    "sameAs": ["https://www.instagram.com/ronnieinfocus"]
+  }
+  </script>
+  <style>
+    /* ═══════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+      font-size: 15px;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #0E0E0E;
+      color: #F5F2ED;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: clip; /* clip ≠ hidden — doesn't block position:sticky */
+    }
+    a   { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    /* Focus visible — keyboard accessibility */
+    :focus-visible {
+      outline: 2px solid #C8A97E;
+      outline-offset: 3px;
+    }
+    /* Screen-reader-only utility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    /* ═══════════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════════ */
+    :root {
+      /* Palette */
+      --cream:        #F5F2ED;
+      --ink:          #0E0E0E;
+      --ink-soft:     #1c1c1c;
+      --mid:          #888;
+      --mid-lt:       rgba(245,242,237,0.45);
+      --accent:       #C8A97E;
+      --soft:         #EDEAE4;
+      --field-bg:     #E8E5DF;
+      --border-light: rgba(14,14,14,0.1);
+      --border-dark:  rgba(245,242,237,0.1);
+      /* Typography */
+      --display: 'Bebas Neue', sans-serif;
+      --body:    'DM Sans', system-ui, sans-serif;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO ZONE — Fixed cinematic landing
+       Pinned behind everything. Content scrolls OVER it.
+       JS fades opacity as user scrolls — dissolve effect.
+    ═══════════════════════════════════════════════ */
+    .hero-zone {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh; /* dvh fills true visible height on mobile browsers */
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;           /* behind .page-wrap (z-index:2) */
+      overflow: hidden;
+      pointer-events: none; /* purely decorative */
+      /* Promote to its own compositor layer for smooth JS-driven opacity fade */
+      will-change: opacity;
+    }
+    /* Warm gold glow behind title */
+    .hero-zone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 55% at 50% 52%,
+        rgba(200,169,126,0.09) 0%, transparent 62%);
+    }
+    /* Thin accent rule at bottom */
+    .hero-zone::after {
+      content: '';
+      position: absolute;
+      left: clamp(2rem, 6vw, 5rem);
+      right: clamp(2rem, 6vw, 5rem);
+      bottom: 0;
+      height: 0.5px;
+      background: rgba(200,169,126,0.18);
+    }
+    /* Title container — centered column */
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    /* The big name */
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(3.2rem, 14vw, 9rem); /* matches intro sizing exactly */
+      line-height: 0.86;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.18em;
+    }
+    .ht-part {
+      display: inline-block;
+      letter-spacing: 0.22em;
+      margin-right: -0.22em; /* cancel trailing letter-spacing so both gaps are equal */
+      opacity: 0;
+      /* Own compositor layer — prevents layout-paint on each animation frame */
+      will-change: transform, opacity;
+    }
+    .ht-part-l {
+      transform: translateX(-80px);
+      animation: heroFromLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+    }
+    .ht-part-r {
+      transform: translateX(80px);
+      animation: heroFromRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+    }
+    .ht-in {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.42em;
+      color: var(--accent);
+      letter-spacing: 0;
+      line-height: 1;
+      align-self: center;
+      position: relative;
+      top: 0.05em;
+      opacity: 0;
+      will-change: opacity, transform;
+      animation: heroFadeUp 0.5s var(--ease-out) 0.65s forwards;
+    }
+    .hero-divider {
+      width: 32px;
+      height: 0.5px;
+      background: var(--accent);
+      opacity: 0;
+      animation: heroFadeUp 0.5s var(--ease-out) 0.9s forwards;
+    }
+    .hero-tagline {
+      font-family: var(--body);
+      font-size: clamp(0.46rem, 0.8vw, 0.6rem);
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.28);
+      opacity: 0;
+      animation: heroFadeUp 0.5s var(--ease-out) 1.05s forwards;
+      white-space: nowrap; /* overridden to normal on mobile */
+    }
+    /* Scroll cue at bottom */
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.48rem;
+      opacity: 0;
+      animation: heroFadeUp 0.6s var(--ease-out) 1.3s forwards;
+    }
+    .hero-scroll-mouse {
+      width: 17px;
+      height: 25px;
+      border: 1px solid rgba(245,242,237,0.22);
+      border-radius: 9px;
+      position: relative;
+    }
+    .hero-scroll-mouse::after {
+      content: '';
+      position: absolute;
+      top: 4px; left: 50%;
+      transform: translateX(-50%);
+      width: 2px; height: 5px;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: scrollWheel 1.6s ease 1.4s infinite;
+    }
+    .hero-scroll-label {
+      font-family: var(--body);
+      font-size: 0.4rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.22);
+      display: block;
+    }
+    /* Hero keyframes */
+    @keyframes heroFromLeft {
+      from { opacity: 0; transform: translateX(-80px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes heroFromRight {
+      from { opacity: 0; transform: translateX(80px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── HERO RESPONSIVE ────────────────────────────
+       Mobile: stack RONNIE / in / FOCUS vertically.
+       Each word fills its own line for maximum impact.
+    ──────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero-title {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        /* Each word fills ~85% of screen width */
+        font-size: clamp(3.6rem, 23vw, 5.5rem);
+        line-height: 0.9;
+      }
+      /* "in" becomes a small bridge between the two stacked words */
+      .ht-in {
+        font-size: 0.2em;
+        top: 0;
+        margin: 0.08em 0;
+        letter-spacing: 0.08em;
+      }
+      /* Keep slide direction but reduce travel distance on small screens */
+      .ht-part-l { transform: translateX(-40px); }
+      .ht-part-r { transform: translateX(40px);  }
+      @keyframes heroFromLeft {
+        from { opacity: 0; transform: translateX(-40px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes heroFromRight {
+        from { opacity: 0; transform: translateX(40px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      /* Allow tagline to wrap and center */
+      .hero-tagline {
+        white-space: normal;
+        text-align: center;
+        letter-spacing: 0.22em;
+        padding: 0 1rem;
+      }
+      /* iOS safe-area: keep scroll cue above home indicator */
+      .hero-scroll-cue {
+        bottom: max(2rem, calc(env(safe-area-inset-bottom) + 1rem));
+      }
+    }
+    /* Very small phones — pull the font in just a touch more */
+    @media (max-width: 380px) {
+      .hero-title { font-size: clamp(3rem, 22vw, 4rem); }
+    }
+
+    /* ── HERO SESSION STATE ─────────────────────────────────
+       Three stages:
+
+       hero-done   — hero visually gone (opacity 0), role buttons
+                     unlocked. Runway still intact so no layout snap
+                     while the user is still in the scroll zone.
+
+       hero-locked — fires once scroll reaches 100vh. Runway collapses
+                     to 0. JS simultaneously resets scrollY to 0 so the
+                     viewport doesn't move. Hero ceases to exist in the
+                     layout — scrolling back up hits the wall at 0.
+
+       hero-skip   — session reload: runway already gone on first paint.
+    ──────────────────────────────────────────────────────── */
+    html.hero-done .hero-zone {
+      opacity: 0 !important;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    html.hero-locked .hero-zone { display: none; }
+    html.hero-locked .page-wrap { margin-top: 0; }
+    html.hero-skip   .page-wrap { margin-top: 0; }
+
+    /* Before hero is dismissed: role switcher visually dim + no clicks */
+    html:not(.hero-done) .site-roles {
+      pointer-events: none;
+      opacity: 0.35;
+      transition: opacity 0.4s ease;
+    }
+
+    /* ── PAGE WRAP — sits above fixed hero, slides over it ── */
+    /* margin-top: 100vh creates the scroll runway for the hero */
+    .page-wrap {
+      position: relative;
+      z-index: 2;
+      margin-top: 100vh;
+      margin-top: 100dvh; /* match dvh so page-wrap lines up with hero bottom */
+      /* Solid background so it visually covers the hero on scroll */
+      background: var(--ink);
+      /* No extra CSS delay — JS already waits SLIDE_MS before adding world-light */
+      transition: background 0.3s ease;
+    }
+    body.world-light .page-wrap { background: var(--cream); }
+
+    /* ═══════════════════════════════════════════════
+       SCROLL REVEAL — JS adds .in when in viewport
+    ═══════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s var(--ease-out),
+                  transform 0.6s var(--ease-out);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Directional variants (from Framer pattern) */
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.65s var(--ease-out),
+                  transform 0.65s var(--ease-out);
+    }
+    .reveal-left.in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.65s var(--ease-out),
+                  transform 0.65s var(--ease-out);
+    }
+    .reveal-right.in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.95) translateY(16px);
+      transition: opacity 0.7s var(--ease-out),
+                  transform 0.7s var(--ease-out);
+    }
+    .reveal-scale.in {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    /* Stagger via nth-child */
+    .stagger > .reveal:nth-child(1)       { transition-delay: 0.00s; }
+    .stagger > .reveal:nth-child(2)       { transition-delay: 0.07s; }
+    .stagger > .reveal:nth-child(3)       { transition-delay: 0.14s; }
+    .stagger > .reveal:nth-child(4)       { transition-delay: 0.21s; }
+    .stagger > .reveal:nth-child(5)       { transition-delay: 0.28s; }
+    .stagger > .reveal:nth-child(6)       { transition-delay: 0.35s; }
+    .stagger > .reveal:nth-child(7)       { transition-delay: 0.42s; }
+    .stagger > .reveal:nth-child(8)       { transition-delay: 0.49s; }
+    .stagger > .reveal:nth-child(9)       { transition-delay: 0.56s; }
+    .stagger > .reveal-scale:nth-child(1) { transition-delay: 0.00s; }
+    .stagger > .reveal-scale:nth-child(2) { transition-delay: 0.09s; }
+    .stagger > .reveal-scale:nth-child(3) { transition-delay: 0.18s; }
+    .stagger > .reveal-scale:nth-child(4) { transition-delay: 0.27s; }
+
+    /* ═══════════════════════════════════════════════
+       HEADER SLIDE + PAGE SEQUENCE
+    ═══════════════════════════════════════════════ */
+    :root {
+      --slide: 0.52s cubic-bezier(0.76, 0, 0.24, 1);
+      --after: 0.52s;
+      --text-fade: 0.3s ease;
+    }
+    .site-header {
+      background: var(--ink);
+      text-align: center;
+      padding: 1.4rem 2rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow: hidden;
+    }
+    /* Cream wipe panel */
+    .site-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--cream);
+      transform: translateX(0%);
+      transition: transform var(--slide);
+    }
+    .site-header.hdr-dark::before {
+      transform: translateX(-101%);
+    }
+    .site-header.slide-from-right::before {
+      background: var(--cream);
+      transform: translateX(101%);
+      transition: none;
+    }
+    .site-header.slide-from-right.hdr-light::before {
+      transform: translateX(0%);
+      transition: transform var(--slide);
+    }
+    /* Dark wipe panel */
+    .site-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--ink);
+      transform: translateX(-101%);
+      transition: transform var(--slide);
+    }
+    .site-header.hdr-dark::after {
+      transform: translateX(0%);
+    }
+    .site-header.slide-from-left::after {
+      transform: translateX(101%);
+      transition: none;
+    }
+    .site-header.slide-from-left.hdr-dark::after {
+      transform: translateX(0%);
+      transition: transform var(--slide);
+    }
+    .site-header > * { position: relative; z-index: 1; }
+    /* Header text color transitions */
+    .site-name,
+    .nav-burger span,
+    .site-role,
+    .role-divider,
+    .site-rule,
+    .avail-text,
+    .scroll-hint-label,
+    .scroll-hint-mouse {
+      transition: color var(--text-fade) var(--after),
+                  background var(--text-fade) var(--after),
+                  border-color var(--text-fade) var(--after),
+                  opacity var(--text-fade) var(--after);
+    }
+    .site-name       { color: var(--cream); }
+    .nav-burger span { background: var(--cream); }
+    .hdr-light .site-name       { color: var(--ink); }
+    .hdr-light .in-text         { color: var(--accent); }
+    .hdr-light .site-role       { color: var(--ink); }
+    .hdr-light .role-divider    { background: var(--accent); }
+    .hdr-light .site-rule       { background: var(--accent); }
+    .hdr-light .nav-burger span { background: var(--ink); }
+    /* Body bg */
+    body.world-light { background: var(--cream); }
+    .photos-page, .page-light, .film-page {
+      background: transparent;
+    }
+    .category-bar {
+      transition: border-color 0.3s ease;
+    }
+
+    /* ─── AVAILABILITY BADGE ─────────────────────── */
+    .avail-badge {
+      position: absolute;
+      top: 50%;
+      left: 2rem;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.48rem;
+      z-index: 1;
+      opacity: 0;
+      animation: hdrFade 0.9s var(--ease-out) 0.7s forwards;
+      pointer-events: none;
+    }
+    .avail-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5acd7a;
+      flex-shrink: 0;
+      animation: availPulse 2.4s ease-in-out infinite;
+    }
+    .avail-text {
+      font-family: var(--body);
+      font-size: 0.48rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+    .hdr-light .avail-text { color: var(--ink); }
+    @keyframes availPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(90,205,122,0.5); }
+      50%      { opacity: 0.75; box-shadow: 0 0 0 5px rgba(90,205,122,0); }
+    }
+    /* .avail-dot--busy: amber dot when not fully available */
+    .avail-dot--busy {
+      background: #e8a44a !important;
+      animation: none !important;
+      box-shadow: 0 0 0 0 transparent !important;
+    }
+
+    /* ─── SCROLL HINT — hidden in compact header (hero has its own) ── */
+    .scroll-hint {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 1.4rem 0 1.2rem;
+      opacity: 0;
+      animation: hdrFade 0.9s var(--ease-out) 1.0s forwards;
+    }
+    .scroll-hint-mouse {
+      width: 17px;
+      height: 25px;
+      border: 1px solid rgba(245,242,237,0.3);
+      border-radius: 9px;
+      position: relative;
+      display: block;
+    }
+    .hdr-light .scroll-hint-mouse {
+      border-color: rgba(14,14,14,0.22);
+    }
+    .scroll-hint-mouse::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 5px;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: scrollWheel 1.6s ease infinite;
+    }
+    .scroll-hint-label {
+      font-family: var(--body);
+      font-size: 0.42rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.3);
+      display: block;
+    }
+    .hdr-light .scroll-hint-label { color: rgba(14,14,14,0.28); }
+    @keyframes scrollWheel {
+      0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      80%  { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* ─── Site name ── */
+    .site-name {
+      font-family: var(--display);
+      font-size: clamp(2.6rem, 9vw, 6.5rem);
+      color: var(--cream);
+      line-height: 1;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.18em;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: hdrFade 0.9s var(--ease-out) 0.1s forwards;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+    .name-part {
+      letter-spacing: 0.22em;
+      margin-right: -0.22em;
+    }
+    .in-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.42em;
+      color: var(--accent);
+      letter-spacing: 0;
+      line-height: 1;
+      align-self: center;
+      position: relative;
+      top: 0.05em;
+    }
+    /* ─── Roles line ── */
+    .site-roles {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-top: 0.85rem;
+      opacity: 0;
+      animation: hdrFade 0.9s var(--ease-out) 0.28s forwards;
+    }
+    .site-role {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      transition: border-color var(--text-fade) var(--after),
+                  opacity var(--text-fade) var(--after),
+                  color var(--text-fade) var(--after);
+    }
+    .site-role:hover { border-bottom-color: var(--accent); }
+    .site-role.role-active  { border-bottom-color: var(--accent); }
+    .site-role.role-inactive { opacity: 0.4; }
+    .role-divider {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin: 0 1.1rem;
+      flex-shrink: 0;
+    }
+    .site-rule {
+      width: 36px;
+      height: 0.5px;
+      background: var(--accent);
+      margin: 1.2rem auto 0;
+      opacity: 0;
+      animation: hdrFade 0.9s var(--ease-out) 0.44s forwards;
+    }
+    @keyframes hdrFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       SERVICES TICKER BAND (Framer-inspired)
+    ═══════════════════════════════════════════════ */
+    .ticker-band {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0.9rem 0;
+      background: var(--ink);
+      border-top: 0.5px solid var(--border-dark);
+      border-bottom: 0.5px solid var(--border-dark);
+      /* No extra CSS delay — JS already times the world-light class change */
+      transition: background 0.3s ease,
+                  border-color 0.3s ease;
+      opacity: 0;
+      animation: hdrFade 0.9s var(--ease-out) 1.3s forwards;
+    }
+    body.world-light .ticker-band {
+      background: var(--soft);
+      border-color: var(--border-light);
+    }
+    body.world-light .ticker-band .ticker-item {
+      color: rgba(14,14,14,0.38);
+    }
+    body.world-light .ticker-band .ticker-gem {
+      color: var(--accent);
+    }
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      /* Two copies for seamless loop — animation drives left by 50% */
+      animation: tickerScroll 28s linear infinite;
+    }
+    .ticker-item {
+      font-family: var(--body);
+      font-size: 0.54rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.38);
+      padding: 0 2.4rem;
+      flex-shrink: 0;
+    }
+    .ticker-gem {
+      color: var(--accent);
+      font-size: 0.46rem;
+      flex-shrink: 0;
+      padding: 0;
+      letter-spacing: 0;
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       BURGER
+    ═══════════════════════════════════════════════ */
+    .nav-burger {
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      z-index: 1001;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--cream);
+      margin: 5px 0;
+      transform-origin: center;
+      transition: transform 0.3s var(--ease-std),
+                  opacity 0.3s,
+                  background var(--text-fade) var(--after);
+    }
+    .nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    /* ─── Drawer ── */
+    .nav-drawer {
+      position: fixed;
+      inset: 0;
+      background: rgba(14,14,14,0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: visibility 0s linear 0.3s,
+                  opacity 0.3s var(--ease-std);
+    }
+    .nav-drawer.is-open {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transition: visibility 0s linear 0s,
+                  opacity 0.3s var(--ease-std);
+    }
+    .nav-drawer-link {
+      font-family: var(--display);
+      font-size: 3.2rem;
+      letter-spacing: 0.14em;
+      color: rgba(245,242,237,0.45);
+      padding: 0.55rem 0;
+      cursor: pointer;
+      transition: color 0.2s, transform 0.2s;
+      background: none;
+      border: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .nav-drawer-link:hover { color: var(--cream); transform: translateX(6px); }
+    .drawer-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.75rem;
+      background: none;
+      border: none;
+      color: var(--mid-lt);
+      font-size: 1.1rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      transition: color 0.2s;
+    }
+    .drawer-close:hover { color: var(--cream); }
+    /* ═══════════════════════════════════════════════
+       PAGE SYSTEM
+    ═══════════════════════════════════════════════ */
+    .page {
+      display: none;
+      min-height: 50vh;
+    }
+    .page.page-active {
+      display: block;
+      animation: pageFade 0.35s ease 0.52s both;
+    }
+    @keyframes pageFade {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-light { color: var(--ink); }
+    .photos-page { color: var(--ink); }
+    /* ─── Category tab bar ── */
+    .category-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      padding: 2.5rem 2rem 0;
+      border-bottom: 0.5px solid var(--border-light);
+    }
+    .cat-btn {
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      background: none;
+      border: none;
+      border-bottom: 1.5px solid transparent;
+      padding: 0.65rem 1.25rem;
+      margin-bottom: -0.5px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+    }
+    .cat-btn:hover   { color: var(--ink); }
+    .cat-btn.cat-active {
+      color: var(--ink);
+      border-bottom-color: var(--accent);
+    }
+    /* ─── Photo masonry grid ── */
+    .photo-section {
+      padding: 1.5rem 1rem 5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .photo-grid {
+      columns: 3;
+      column-gap: 4px;
+    }
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 4px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+      animation: photoIn 0.5s var(--ease-out) both;
+    }
+    @keyframes photoIn {
+      from { opacity: 0; transform: scale(0.97) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .photo-item img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.88);
+      transition: transform 0.65s var(--ease-out),
+                  filter 0.38s ease;
+    }
+    .photo-item:hover img,
+    .photo-item:focus img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14,14,14,0.62) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.85rem;
+      pointer-events: none;
+    }
+    .photo-item:hover .photo-overlay { opacity: 1; }
+    .photo-cap {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--cream);
+    }
+    /* Placeholder cards */
+    .photo-ph {
+      background: #dedad3;
+      border: 0.5px dashed rgba(14,14,14,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      color: rgba(14,14,14,0.2);
+      cursor: default;
+    }
+    .ph-icon {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: rgba(200,169,126,0.4);
+    }
+    .ph-lbl {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .photo-item.cat-hidden { display: none; }
+    /* ═══════════════════════════════════════════════
+       LIGHTBOX
+    ═══════════════════════════════════════════════ */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(14,14,14,0.97);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s linear 0.25s,
+                  opacity 0.25s var(--ease-std);
+    }
+    .lightbox.lb-open {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s linear 0s,
+                  opacity 0.25s var(--ease-std);
+    }
+    .lb-img {
+      max-width: 88vw;
+      max-height: 85vh;
+      object-fit: contain;
+      transition: opacity 0.2s ease;
+    }
+    .lb-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.75rem;
+      background: none;
+      border: none;
+      color: var(--mid-lt);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .lb-close:hover { color: var(--cream); }
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(245,242,237,0.3);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 1.5rem;
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+    }
+    .lb-nav:hover { color: var(--cream); }
+    .lb-prev { left: 0; }
+    .lb-next { right: 0; }
+    .lb-caption {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: var(--mid-lt);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .lb-counter {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--mid-lt);
+    }
+    /* ═══════════════════════════════════════════════
+       FILM PAGE
+    ═══════════════════════════════════════════════ */
+    .film-page { background: var(--ink); }
+    .film-section {
+      padding: 3rem 1.5rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 0.56rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 2.5rem;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .video-embed {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #111;
+    }
+    .video-embed iframe,
+    .video-embed video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .vp {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      border: 0.5px dashed rgba(245,242,237,0.07);
+    }
+    .vp-play {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(200,169,126,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 0.72rem;
+    }
+    .vp-lbl {
+      font-size: 0.54rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.2);
+    }
+    .video-meta  { margin-top: 0.65rem; }
+    .video-type  {
+      font-size: 0.54rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .video-title {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+    }
+    /* ═══════════════════════════════════════════════
+       BOOKING PAGE
+    ═══════════════════════════════════════════════ */
+    .booking-page {
+      background: var(--cream);
+      color: var(--ink);
+    }
+    .booking-wrap {
+      padding: 5rem 2rem 7rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    /* Left column sticks while form scrolls.
+       --hdr-h is measured by JS on load+resize so the sticky
+       top always clears the sticky site-header.
+       max-height caps height to remaining viewport space.
+       overflow-y: auto lets it scroll internally on short screens. */
+    .bk-left {
+      position: sticky;
+      top: calc(var(--hdr-h, 9rem) + 1.5rem);
+      max-height: calc(100vh - var(--hdr-h, 9rem) - 3rem);
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(14,14,14,0.15) transparent;
+    }
+    .bk-left::-webkit-scrollbar { width: 3px; }
+    .bk-left::-webkit-scrollbar-track { background: transparent; }
+    .bk-left::-webkit-scrollbar-thumb {
+      background: rgba(14,14,14,0.12);
+      border-radius: 2px;
+    }
+    .bk-eyebrow {
+      font-size: 0.52rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .bk-heading {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 4.2vw, 4.2rem);
+      letter-spacing: 0.04em;
+      line-height: 0.94;
+      color: var(--ink);
+      margin-bottom: 1.1rem;
+    }
+    .bk-heading em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.62em;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      display: block;
+      line-height: 1.3;
+    }
+    .bk-body {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      max-width: 300px;
+    }
+    .bk-info { border-top: 0.5px solid var(--border-light); }
+    .bk-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.58rem 0;
+      border-bottom: 0.5px solid var(--border-light);
+    }
+    .bk-key {
+      font-size: 0.5rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      flex-shrink: 0;
+    }
+    .bk-val {
+      font-size: 0.76rem;
+      color: var(--ink);
+      text-align: right;
+    }
+    /* Rush hint — sits under the standard time in the turnaround cell */
+    .bk-rush-hint {
+      display: block;
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-top: 0.18rem;
+      opacity: 0.9;
+    }
+    /* Rush upsell row (hidden for now — future bundle builder) */
+    .bk-rush-row .bk-key { color: var(--accent); }
+    .bk-rush-val {
+      color: var(--accent) !important;
+      font-weight: 600;
+    }
+
+    /* Inline contact links — email + IG on one row */
+    .bk-contact-pair {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+    .bk-contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--ink);
+      font-size: 0.72rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .bk-contact-link:hover { color: var(--accent); }
+    .bk-contact-icon {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      opacity: 0.65;
+      transition: opacity 0.2s;
+    }
+    .bk-contact-link:hover .bk-contact-icon { opacity: 1; }
+    /* Form section label */
+    .form-section-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin: 1.6rem 0 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--border-light);
+    }
+    .form-section-label:first-child { margin-top: 0; }
+    .bk-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+    .field label {
+      font-size: 0.55rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .field input,
+    .field textarea {
+      font-family: var(--body);
+      font-size: 16px;
+      color: var(--ink);
+      background: var(--field-bg);
+      border: 0.5px solid var(--border-light);
+      padding: 0.75rem 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+      width: 100%;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: rgba(14,14,14,0.28); }
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 92px; }
+    .chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.42rem;
+    }
+    .chip {
+      padding: 0.52rem 1rem;
+      font-family: var(--body);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #fff;
+      border: 1px solid rgba(14,14,14,0.18);
+      color: rgba(14,14,14,0.5);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .chip:hover {
+      border-color: rgba(14,14,14,0.4);
+      color: var(--ink);
+    }
+    .chip.chip-on {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+      box-shadow: 0 2px 8px rgba(14,14,14,0.18);
+    }
+    .chip.chip-budget.chip-on {
+      background: var(--accent);
+      color: var(--ink);
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(200,169,126,0.35);
+    }
+    .hidden-field { display: none; }
+    .submit-row {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border-light);
+    }
+    .submit-btn {
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      padding: 1rem 2.8rem;
+      font-family: var(--body);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      min-height: 48px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s, transform 0.18s, letter-spacing 0.2s;
+      flex-shrink: 0;
+    }
+    .submit-btn:hover  { background: #1a1a1a; letter-spacing: 0.32em; }
+    .submit-btn:active { transform: scale(0.97); }
+    .submit-note {
+      font-size: 0.68rem;
+      color: rgba(14,14,14,0.4);
+      line-height: 1.6;
+    }
+    .bk-success {
+      display: none;
+      text-align: center;
+      padding: 5rem 0 2rem;
+    }
+    .success-glyph {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .success-head {
+      font-family: var(--display);
+      font-size: 2.8rem;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .success-sub {
+      font-size: 0.85rem;
+      color: var(--mid);
+    }
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    .site-footer {
+      background: var(--ink);
+      text-align: center;
+      padding: 2.25rem 1.5rem;
+      border-top: 0.5px solid var(--border-dark);
+    }
+    .footer-ig-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--mid-lt);
+      transition: color 0.25s;
+      text-decoration: none;
+    }
+    .footer-ig-link:hover { color: var(--accent); }
+    .ig-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: block;
+    }
+    .footer-handle {
+      font-size: 0.62rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+    }
+    .footer-copy {
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,242,237,0.16);
+      margin-top: 0.5rem;
+    }
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .site-header { padding: 1.1rem 1.5rem 0; }
+      .avail-badge { left: 1.5rem; }
+      .photo-grid { columns: 2; }
+      .photo-overlay { opacity: 1; }
+      .video-grid { grid-template-columns: 1fr; }
+      .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .bk-left { position: static; max-height: none; overflow-y: visible; padding-right: 0; }
+      .bk-body { max-width: 100%; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .category-bar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        scrollbar-width: none;
+      }
+      .category-bar::-webkit-scrollbar { display: none; }
+    }
+    @media (max-width: 480px) {
+      .photo-grid { columns: 1; }
+      .site-name  { letter-spacing: 0.1em; }
+      .bk-heading { font-size: 3rem; }
+      .nav-drawer-link { font-size: 2.5rem; }
+      .avail-badge { display: none; } /* hide on very small screens */
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-left, .reveal-right, .reveal-scale,
+      .photo-item, .page, .nav-drawer, .lightbox, .site-name,
+      .site-roles, .site-rule, .ticker-track {
+        animation: none !important;
+        transition: opacity 0.01s !important;
+      }
+      .reveal, .reveal-left, .reveal-right, .reveal-scale {
+        opacity: 1;
+        transform: none;
+      }
+      .ticker-track { transform: none; }
+    }
+  </style>
+  <!-- Runs before paint: skip hero on returning session visits -->
+  <script>try{if(sessionStorage.getItem('heroSeen')){document.documentElement.classList.add('hero-done');document.documentElement.classList.add('hero-skip');}}catch(e){}</script>
+  <!-- Netlify Identity — enables /admin login -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="world-light">
+  <!-- Skip to content — accessibility -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO ZONE — Fixed cinematic title (z-index: 1)
+       The .page-wrap below scrolls OVER this, dissolving it.
+  ═══════════════════════════════════════════════ -->
+  <section class="hero-zone" id="heroZone" aria-label="Welcome to RonnieinFocus">
+    <div class="hero-inner">
+      <h1 class="hero-title" aria-label="RonnieinFocus">
+        <span class="ht-part ht-part-l">RONNIE</span>
+        <span class="ht-in" aria-hidden="true">in</span>
+        <span class="ht-part ht-part-r">FOCUS</span>
+      </h1>
+      <div class="hero-divider" aria-hidden="true"></div>
+      <p class="hero-tagline">Photography &nbsp;·&nbsp; Cinematography</p>
+    </div>
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <span class="hero-scroll-mouse"></span>
+      <span class="hero-scroll-label">scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       PAGE WRAP — z-index: 2, margin-top: 100vh
+       Slides up and over the fixed hero on scroll.
+       Sticky header appears at the leading edge.
+  ═══════════════════════════════════════════════ -->
+  <div class="page-wrap">
+  <header class="site-header hdr-light" role="banner">
+
+    <!--
+      ┌─ AVAILABILITY BADGE ──────────────────────────────────────────────┐
+      │  To update: change the text inside <span class="avail-text">      │
+      │  To hide:   add  style="display:none"  to the div below           │
+      │                                                                    │
+      │  Examples:                                                         │
+      │    "Available"          ← open for bookings (green dot pulses)    │
+      │    "Booked through May" ← let clients know you're full            │
+      │    "Limited Availability"                                          │
+      └────────────────────────────────────────────────────────────────── ┘
+    -->
+    <div class="avail-badge" aria-label="Availability status">
+      <span class="avail-dot" aria-hidden="true"></span>
+      <span class="avail-text">Available</span>
+    </div>
+
+    <button
+      class="nav-burger"
+      id="burgerBtn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="navDrawer"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <!-- Site name — acts as home/photos trigger -->
+    <button class="site-name" onclick="switchRole('photos')"
+        aria-label="RonnieinFocus — go to photos">
+      <span class="name-part">RONNIE</span>
+      <span class="in-text" aria-hidden="true">in</span>
+      <span class="name-part">FOCUS</span>
+    </button>
+
+    <div class="site-roles" aria-label="Navigate by discipline">
+      <button
+        class="site-role role-active"
+        id="rolePhotographer"
+        onclick="switchRole('photos')"
+        aria-label="Photographer — view photos"
+      >Photographer</button>
+      <span class="role-divider" aria-hidden="true"></span>
+      <button
+        class="site-role role-inactive"
+        id="roleCinematographer"
+        onclick="switchRole('film')"
+        aria-label="Cinematographer — view film work"
+      >Cinematographer</button>
+    </div>
+
+    <!-- Scroll hint mouse indicator -->
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint-mouse"></span>
+      <span class="scroll-hint-label">scroll</span>
+    </div>
+
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       SERVICES TICKER BAND — Framer-inspired infinite scroll
+  ═══════════════════════════════════════════════ -->
+  <div class="ticker-band" aria-hidden="true">
+    <div class="ticker-track">
+      <!-- First copy -->
+      <span class="ticker-item">Photography</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Cinematography</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Direction</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Brand Films</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Events</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Portraits</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">BTS</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Street</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Available to Travel</span>
+      <span class="ticker-gem">✦</span>
+      <!-- Second copy for seamless loop -->
+      <span class="ticker-item">Photography</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Cinematography</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Direction</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Brand Films</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Events</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Portraits</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">BTS</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Street</span>
+      <span class="ticker-gem">✦</span>
+      <span class="ticker-item">Available to Travel</span>
+      <span class="ticker-gem">✦</span>
+    </div>
+  </div>
+
+  <!-- Menu drawer -->
+  <div
+    class="nav-drawer"
+    id="navDrawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menu"
+    aria-hidden="true"
+  >
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu">✕</button>
+    <button class="nav-drawer-link" onclick="showPage('booking'); closeDrawer()">Book</button>
+    <button class="nav-drawer-link" onclick="showPage('about');   closeDrawer()">About</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ─── PAGE: PHOTOS ───────────────────────── -->
+    <div class="page photos-page page-active" id="page-photos" role="region" aria-label="Photo portfolio">
+      <nav class="category-bar" aria-label="Photo categories" id="catBar">
+        <button class="cat-btn cat-active" data-cat="all"      onclick="filterCat(this)">All</button>
+        <button class="cat-btn"            data-cat="portrait"  onclick="filterCat(this)">Portrait</button>
+        <button class="cat-btn"            data-cat="gym"       onclick="filterCat(this)">Gym</button>
+        <button class="cat-btn"            data-cat="event"     onclick="filterCat(this)">Event</button>
+        <button class="cat-btn"            data-cat="bts"       onclick="filterCat(this)">BTS</button>
+        <button class="cat-btn"            data-cat="street"    onclick="filterCat(this)">Street</button>
+      </nav>
+      <div class="photo-section">
+        <!--
+          ═══════════════════════════════════════════════════════════
+          HOW TO ADD YOUR PHOTOS — replace each placeholder block:
+
+            <div class="photo-item"
+                 data-cat="portrait"
+                 data-index="0"
+                 onclick="openLb(0)"
+                 tabindex="0"
+                 role="button"
+                 aria-label="Photo: Your caption here">
+              <img
+                src="path/to/photo.jpg"
+                alt="Descriptive alt text"
+                loading="lazy"
+                width="800"
+                height="1000"
+              />
+              <div class="photo-overlay" aria-hidden="true">
+                <span class="photo-cap">Caption</span>
+              </div>
+            </div>
+
+          Categories: portrait · gym · event · bts · street
+          Use data-cat="all" if it belongs to no specific category.
+          Always include width + height to prevent layout shift.
+          ═══════════════════════════════════════════════════════════
+        -->
+        <!-- Photos are loaded from data/gallery.json via the CMS.
+             Add photos at yoursite.com/admin → Photo Gallery. -->
+        <div class="photo-grid stagger" id="photoGrid">
+          <!-- JS renders photo items here from gallery.json -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: FILM ─────────────────────────── -->
+    <div class="page film-page" id="page-film" role="region" aria-label="Film work">
+      <div class="film-section">
+        <span class="section-eyebrow reveal">Film &amp; Cinematography</span>
+        <!--
+          HOW TO ADD VIDEOS — replace the .vp div with an iframe:
+
+          YouTube:
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID"
+              title="Project name"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          Vimeo:
+            <iframe
+              src="https://player.vimeo.com/video/VIDEO_ID"
+              title="Project name"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+
+          Then update .video-type and .video-title below each embed.
+        -->
+        <!--
+          HOW TO ADD YOUR VIDEOS:
+          Replace VIDEO_ID in each src with your actual ID.
+          YouTube:  https://www.youtube.com/embed/VIDEO_ID
+          Vimeo:    https://player.vimeo.com/video/VIDEO_ID
+          Duplicate a video-item block to add more videos.
+        -->
+        <div class="video-grid stagger" id="videoGrid">
+
+          <div class="video-item reveal-scale">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                title="Project name" allowfullscreen loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+              </iframe>
+            </div>
+            <div class="video-meta">
+              <p class="video-type">Brand Film</p>
+              <h3 class="video-title">Project Title Here</h3>
+            </div>
+          </div>
+
+          <div class="video-item reveal-scale">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                title="Project name" allowfullscreen loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+              </iframe>
+            </div>
+            <div class="video-meta">
+              <p class="video-type">Reel</p>
+              <h3 class="video-title">Project Title Here</h3>
+            </div>
+          </div>
+
+          <div class="video-item reveal-scale">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                title="Project name" allowfullscreen loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+              </iframe>
+            </div>
+            <div class="video-meta">
+              <p class="video-type">Cinematography</p>
+              <h3 class="video-title">Project Title Here</h3>
+            </div>
+          </div>
+
+          <div class="video-item reveal-scale">
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+                title="Project name" allowfullscreen loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+              </iframe>
+            </div>
+            <div class="video-meta">
+              <p class="video-type">Church</p>
+              <h3 class="video-title">Project Title Here</h3>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: BOOKING ──────────────────────── -->
+    <div class="page booking-page" id="page-booking" role="region" aria-label="Book a session">
+      <div class="booking-wrap">
+        <div class="booking-grid">
+          <!-- Left: heading + info -->
+          <div class="bk-left reveal-left">
+            <span class="bk-eyebrow">Book a Session</span>
+            <h2 class="bk-heading">
+              LET'S<br>BUILD<br><em>something real.</em>
+            </h2>
+            <p class="bk-body">
+              Tell me what you're working on and I'll reach back within
+              24–48 hours. You don't need a fully formed idea — just a
+              direction is enough to start.
+            </p>
+            <dl class="bk-info">
+              <div class="bk-row">
+                <dt class="bk-key">Response time</dt>
+                <dd class="bk-val">24–48 hours</dd>
+              </div>
+              <div class="bk-row">
+                <dt class="bk-key">To hold your date</dt>
+                <dd class="bk-val">50% deposit</dd>
+              </div>
+              <div class="bk-row">
+                <dt class="bk-key">Location</dt>
+                <dd class="bk-val">Local + available to travel</dd>
+              </div>
+              <div class="bk-row" id="bkTurnaroundRow">
+                <dt class="bk-key">Turnaround</dt>
+                <dd class="bk-val" id="bkTurnaround">2–4 weeks</dd>
+              </div>
+              <div class="bk-row bk-rush-row" id="bkRushRow" style="display:none">
+                <dt class="bk-key">Rush</dt>
+                <dd class="bk-val bk-rush-val" id="bkRush"></dd>
+              </div>
+              <div class="bk-row">
+                <dt class="bk-key">Services</dt>
+                <dd class="bk-val">Photo · Video · Direction</dd>
+              </div>
+              <div class="bk-row">
+                <dt class="bk-key">Contact</dt>
+                <dd class="bk-val">
+                  <div class="bk-contact-pair">
+                    <!-- Email -->
+                    <a href="mailto:ronniewiththecam@outlook.com" class="bk-contact-link" title="Email Ronnie">
+                      <svg class="bk-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+                      </svg>
+                      ronniewiththecam@outlook.com
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/ronnieinfocus" target="_blank" rel="noopener noreferrer" class="bk-contact-link" title="Instagram">
+                      <svg class="bk-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                      </svg>
+                      @ronnieinfocus
+                    </a>
+                  </div>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Right: form -->
+          <div class="bk-right reveal-right">
+            <!--
+              FORM BACKEND: Formsubmit.co — free, no account needed.
+              HOW TO ACTIVATE (one-time, 2 minutes):
+                Submit this form once yourself (or wait for the first real inquiry).
+                Formsubmit will send ONE activation email to ronniewiththecam@outlook.com.
+                Click the "Activate Form" link in that email — done.
+                All future inquiries go straight to your inbox.
+            -->
+            <form class="bk-form" id="bookingForm"
+                  action="https://formsubmit.co/ajax/ronniewiththecam@outlook.com"
+                  method="POST"
+                  onsubmit="handleSubmit(event)"
+                  novalidate>
+              <!-- Formsubmit.co config fields -->
+              <input type="hidden" name="_subject"  value="New Inquiry — RonnieinFocus.com">
+              <input type="hidden" name="_captcha"  value="false">
+              <input type="hidden" name="_template" value="table">
+
+              <!-- ① What are you looking for? -->
+              <span class="form-section-label">What are you looking for?</span>
+              <div class="field">
+                <label id="svc-label" class="sr-only">Service <span aria-hidden="true">*</span></label>
+                <div class="chip-wrap" role="group" aria-labelledby="svc-label">
+                  <button type="button" class="chip" data-val="photography"
+                          onclick="pickChip(this,'svcVal')">Photography</button>
+                  <button type="button" class="chip" data-val="event-coverage"
+                          onclick="pickChip(this,'svcVal')">Event Coverage</button>
+                  <button type="button" class="chip" data-val="reel"
+                          onclick="pickChip(this,'svcVal')">Reel / Video</button>
+                  <button type="button" class="chip" data-val="brand-film"
+                          onclick="pickChip(this,'svcVal')">Brand Film</button>
+                  <button type="button" class="chip" data-val="direction"
+                          onclick="pickChip(this,'svcVal')">Direction / DP</button>
+                  <button type="button" class="chip" data-val="church"
+                          onclick="pickChip(this,'svcVal')">Church / Faith Org</button>
+                  <button type="button" class="chip" data-val="unsure"
+                          onclick="pickChip(this,'svcVal')">Not Sure Yet</button>
+                </div>
+                <input class="hidden-field" type="text" id="svcVal" name="service" required aria-hidden="true" />
+              </div>
+
+              <!-- ② When? -->
+              <span class="form-section-label">When?</span>
+              <div class="field">
+                <label for="projDate">Ideal shoot date <span style="font-size:0.85em;letter-spacing:0;text-transform:none;">(approximate is fine)</span></label>
+                <input type="date" id="projDate" name="date" />
+              </div>
+
+              <!-- ③ How to reach you -->
+              <span class="form-section-label">How to reach you</span>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="fname">First Name <span aria-hidden="true">*</span></label>
+                  <input type="text" id="fname" name="fname"
+                         placeholder="First" required autocomplete="given-name" />
+                </div>
+                <div class="field">
+                  <label for="lname">Last Name</label>
+                  <input type="text" id="lname" name="lname"
+                         placeholder="Last" autocomplete="family-name" />
+                </div>
+              </div>
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="email">Email <span aria-hidden="true">*</span></label>
+                  <input type="email" id="email" name="email"
+                         placeholder="you@email.com" required autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="phone">Phone <span style="font-size:0.85em;letter-spacing:0;text-transform:none;">(optional)</span></label>
+                  <input type="tel" id="phone" name="phone"
+                         placeholder="(000) 000-0000" autocomplete="tel" />
+                </div>
+              </div>
+
+              <!-- ④ Budget -->
+              <span class="form-section-label">Approximate Budget</span>
+              <div class="field">
+                <label id="budget-label" class="sr-only">Approximate Budget</label>
+                <div class="chip-wrap" role="group" aria-labelledby="budget-label">
+                  <button type="button" class="chip chip-budget" data-val="under-500"
+                          onclick="pickChip(this,'budgetVal')">Under $500</button>
+                  <button type="button" class="chip chip-budget" data-val="500-2500"
+                          onclick="pickChip(this,'budgetVal')">$500–$2.5K</button>
+                  <button type="button" class="chip chip-budget" data-val="2500-10k"
+                          onclick="pickChip(this,'budgetVal')">$2.5K–$10K</button>
+                  <button type="button" class="chip chip-budget" data-val="10k-plus"
+                          onclick="pickChip(this,'budgetVal')">$10K+</button>
+                </div>
+                <input class="hidden-field" type="text" id="budgetVal" name="budget" aria-hidden="true" />
+              </div>
+
+              <!-- ⑤ Project details -->
+              <span class="form-section-label">Tell me about it</span>
+              <div class="field">
+                <label for="message" class="sr-only">Tell me about your project</label>
+                <textarea id="message" name="message" rows="5"
+                  placeholder="What are you making? Who is it for? What feeling should it have? The more you share, the better I can help."></textarea>
+              </div>
+
+              <!-- Submit -->
+              <div class="submit-row">
+                <button type="submit" class="submit-btn" id="submitBtn">Send Inquiry →</button>
+                <p class="submit-note">I respond within 24–48 hrs.<br>No spam, just a real conversation.</p>
+              </div>
+            </form>
+            <!-- Success state -->
+            <div class="bk-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
+              <div class="success-glyph" aria-hidden="true">✦</div>
+              <h3 class="success-head">Received.</h3>
+              <p class="success-sub">I'll be in touch within 24–48 hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PAGE: ABOUT ────────────────────────── -->
+    <div class="page booking-page" id="page-about" role="region" aria-label="About">
+      <div class="booking-wrap" style="max-width:780px;">
+        <div class="reveal">
+          <span style="font-size:0.56rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:1.5rem;">About</span>
+          <h2 class="bk-heading" style="font-size:clamp(3rem,5vw,5rem);margin-bottom:1.75rem;">
+            RONNIE<br>HILLMAN<br><em>in focus.</em>
+          </h2>
+          <p style="font-size:0.95rem;color:var(--mid);line-height:1.95;margin-bottom:1.25rem;max-width:560px;">
+            Photographer and cinematographer with a conviction that every frame should
+            carry weight. The work spans portraits, brand films, events, and cinematic
+            content — built for brands and individuals who want to communicate something real.
+          </p>
+          <p style="font-size:0.95rem;color:var(--mid);line-height:1.95;margin-bottom:2.5rem;max-width:560px;">
+            Based wherever the work takes me. Every project starts with a conversation.
+            Every deliverable is edited and graded with intention — no templates, no shortcuts.
+          </p>
+          <dl style="border-top:0.5px solid var(--border-light);">
+            <div class="bk-row">
+              <dt class="bk-key">Disciplines</dt>
+              <dd class="bk-val">Photography · Cinematography · Direction</dd>
+            </div>
+            <div class="bk-row">
+              <dt class="bk-key">Tools</dt>
+              <dd class="bk-val">Lightroom · DaVinci Resolve · Higgsfield AI</dd>
+            </div>
+            <div class="bk-row">
+              <dt class="bk-key">Instagram</dt>
+              <dd class="bk-val">
+                <a href="https://www.instagram.com/ronnieinfocus" target="_blank" rel="noopener"
+                   style="color:var(--ink);">@ronnieinfocus</a>
+              </dd>
+            </div>
+          </dl>
+          <div style="margin-top:2.5rem;">
+            <button onclick="showPage('booking')" class="submit-btn">Book a Session</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       LIGHTBOX
+  ═══════════════════════════════════════════════ -->
+  <div
+    class="lightbox"
+    id="lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Photo viewer"
+  >
+    <button class="lb-close" id="lbClose" onclick="closeLb()" aria-label="Close photo viewer">✕</button>
+    <button class="lb-nav lb-prev" onclick="lbStep(-1)" aria-label="Previous photo">←</button>
+    <img class="lb-img" id="lbImg" src="" alt="" />
+    <button class="lb-nav lb-next" onclick="lbStep(1)" aria-label="Next photo">→</button>
+    <span class="lb-counter" id="lbCounter" aria-live="polite"></span>
+    <span class="lb-caption"  id="lbCaption"  aria-live="polite"></span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <a href="https://www.instagram.com/ronnieinfocus"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="footer-ig-link"
+       aria-label="RonnieinFocus on Instagram">
+      <!-- Instagram logo SVG -->
+      <svg class="ig-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+      <span class="footer-handle">@ronnieinfocus</span>
+    </a>
+    <p class="footer-copy">© 2026 RonnieinFocus. All rights reserved.</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    /* Intro splash removed — hero itself now performs the entrance animation */
+
+    /* ─────────────────────────────────────────────
+       ROLE SWITCHER
+       Directional header wipe + delayed body bg flip.
+    ───────────────────────────────────────────── */
+    const SLIDE_MS = 520;
+
+    function switchRole(page) {
+      const header    = document.querySelector('.site-header');
+      const rolePhoto = document.getElementById('rolePhotographer');
+      const roleCine  = document.getElementById('roleCinematographer');
+      const isLight   = header.classList.contains('hdr-light');
+
+      // Only skip if we're already on that role's PAGE — not just matching header color.
+      // This lets the role buttons navigate away from booking/about even when the
+      // header is already light (because booking forced it to light).
+      const activeId = document.querySelector('.page-active')?.id;
+      if (page === 'photos' && isLight   && activeId === 'page-photos') return;
+      if (page === 'film'   && !isLight  && activeId === 'page-film')   return;
+
+      if (page === 'photos') {
+        rolePhoto.classList.add('role-active');
+        rolePhoto.classList.remove('role-inactive');
+        roleCine.classList.remove('role-active');
+        roleCine.classList.add('role-inactive');
+
+        if (isLight) {
+          /* Header already light (e.g. coming from booking page) —
+             just switch the page content, no wipe needed. */
+          showPage(page);
+        } else {
+          /* Wipe from dark → light */
+          header.classList.add('slide-from-right');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              header.classList.remove('hdr-dark');
+              header.classList.add('hdr-light');
+              header.classList.remove('slide-from-right');
+              showPage(page);
+              setTimeout(() => {
+                document.body.style.transition = 'background 0.3s ease';
+                document.body.classList.add('world-light');
+                setTimeout(() => { document.body.style.transition = ''; }, 350);
+              }, SLIDE_MS);
+            });
+          });
+        }
+
+      } else if (page === 'film') {
+        /* Step 1: snap ink panel to the left (off-screen) with no transition */
+        header.classList.add('slide-from-left');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            /* Step 2: same sync approach going back to dark */
+            header.classList.remove('hdr-light');
+            header.classList.add('hdr-dark');
+            header.classList.remove('slide-from-left');
+            showPage(page); /* ← fires HERE, synced with header */
+            setTimeout(() => {
+              document.body.style.transition = 'background 0.3s ease';
+              document.body.classList.remove('world-light');
+              setTimeout(() => { document.body.style.transition = ''; }, 350);
+            }, SLIDE_MS);
+          });
+        });
+        roleCine.classList.add('role-active');
+        roleCine.classList.remove('role-inactive');
+        rolePhoto.classList.remove('role-active');
+        rolePhoto.classList.add('role-inactive');
+      }
+    }
+
+    /* ─────────────────────────────────────────────
+       PAGE SWITCHER
+       Scroll lands at the TOP of the active page
+       (page-wrap starts at 100vh offset from hero).
+       We measure the page-wrap's real offset instead
+       of assuming window.innerHeight so it's accurate
+       on every device / content height.
+    ───────────────────────────────────────────── */
+    function showPage(name) {
+      // If hero has been seen but runway isn't locked yet, lock it now.
+      // Handles the case where user clicks a nav button before scrolling
+      // all the way to 99% — prevents the empty space above the portfolio.
+      const htmlEl = document.documentElement;
+      if (htmlEl.classList.contains('hero-done') && !htmlEl.classList.contains('hero-locked')) {
+        htmlEl.classList.add('hero-locked');
+      }
+
+      // Capture role context BEFORE any header state change
+      const header  = document.querySelector('.site-header');
+      const isFilm  = header?.classList.contains('hdr-dark');
+
+      document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('page-active');
+      });
+      const target = document.getElementById('page-' + name);
+      if (target) target.classList.add('page-active');
+
+      // Booking + About are always cream/light pages.
+      // If the header is currently dark, gently fade it to light so the
+      // header color matches the page — no wipe, just a color transition.
+      if ((name === 'booking' || name === 'about') && isFilm) {
+        header.classList.remove('hdr-dark');
+        header.classList.add('hdr-light');
+        document.body.style.transition = 'background 0.3s ease';
+        document.body.classList.add('world-light');
+        setTimeout(() => { document.body.style.transition = ''; }, 350);
+      }
+
+      // Find the top of the page-wrap and clamp to max scrollable distance
+      const wrap = document.querySelector('.page-wrap');
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const wrapTop   = wrap ? wrap.offsetTop : window.innerHeight;
+      const targetY   = Math.min(wrapTop, maxScroll);
+
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+      scheduleReveal();
+
+      // Pre-select service chip based on role context when opening booking
+      if (name === 'booking') {
+        const preVal  = isFilm ? 'reel' : 'photography';
+        const preChip = document.querySelector(`#bookingForm .chip[data-val="${preVal}"]`);
+        if (preChip && !document.getElementById('svcVal').value) {
+          pickChip(preChip, 'svcVal');
+        }
+      }
+    }
+
+    /* ─────────────────────────────────────────────
+       MOBILE NAVIGATION
+    ───────────────────────────────────────────── */
+    const burgerBtn   = document.getElementById('burgerBtn');
+    const navDrawer   = document.getElementById('navDrawer');
+    const drawerClose = document.getElementById('drawerClose');
+
+    burgerBtn.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+
+    function openDrawer() {
+      navDrawer.classList.add('is-open');
+      burgerBtn.setAttribute('aria-expanded', 'true');
+      navDrawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      drawerClose.focus();
+    }
+
+    function closeDrawer() {
+      navDrawer.classList.remove('is-open');
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      navDrawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      burgerBtn.focus();
+    }
+
+    navDrawer.addEventListener('click', function(e) {
+      if (e.target === this) closeDrawer();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (navDrawer.classList.contains('is-open')) closeDrawer();
+        if (document.getElementById('lightbox').classList.contains('lb-open')) closeLb();
+      }
+    });
+
+    /* ─────────────────────────────────────────────
+       SCROLL REVEAL — handles all directional variants
+    ───────────────────────────────────────────── */
+    let revealObs = null;
+
+    function scheduleReveal() {
+      requestAnimationFrame(() => {
+        if (revealObs) revealObs.disconnect();
+        revealObs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              revealObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+        // Observe all reveal variants in the active page
+        const sel = '.page-active .reveal, .page-active .reveal-left, .page-active .reveal-right, .page-active .reveal-scale';
+        document.querySelectorAll(sel).forEach(el => {
+          revealObs.observe(el);
+        });
+      });
+    }
+    scheduleReveal();
+
+    /* ─────────────────────────────────────────────
+       HERO DISSOLVE + RUNWAY LOCK
+
+       Three-phase sequence on first visit:
+
+       0 → 85% scroll  — hero fades (cubic ease-out).
+                          Role buttons unlock at 85%.
+
+       85 → 99% scroll — hero fully invisible, user
+                          gliding into the site.
+
+       ≥ 99% scroll    — LOCK: collapse the 100vh runway
+                          and instantly reset scrollY so
+                          the viewport doesn't move. The
+                          hero space ceases to exist —
+                          scrolling back up hits 0.
+
+       Session reload   — hero-skip skips straight to
+                          content, no runway at all.
+    ───────────────────────────────────────────── */
+    (function() {
+      const heroZone = document.getElementById('heroZone');
+      if (!heroZone) return;
+
+      const isSkip   = document.documentElement.classList.contains('hero-skip');
+      let heroSeen   = isSkip;
+      let heroLocked = isSkip;
+      let ticking    = false;
+
+      function lockRunway() {
+        heroLocked = true;
+        // How far past the 100vh mark did the user scroll? (fast scrollers)
+        const overshoot = Math.max(0, window.scrollY - window.innerHeight);
+        // Collapse the runway — page-wrap jumps to document top
+        document.documentElement.classList.add('hero-locked');
+        // Instantly reset scroll to keep viewport at same visual position.
+        // page-wrap was at offset=100vh, now at offset=0, so scrollY=overshoot
+        // keeps the exact same content at the top of the viewport.
+        window.scrollTo({ top: overshoot, behavior: 'instant' });
+        // No more need to listen
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onResize);
+      }
+
+      function applyDissolve(fromResize) {
+        ticking = false;
+        if (heroLocked) return;
+        const vh  = window.innerHeight;
+        const raw = Math.min(1, Math.max(0, window.scrollY / vh));
+
+        // Drive opacity on first-visit only
+        if (!isSkip) {
+          const eased = 1 - Math.pow(1 - raw, 3);
+          heroZone.style.opacity = String(1 - eased);
+        }
+
+        // 85% — hero visually gone, unlock role buttons
+        if (raw >= 0.85 && !heroSeen) {
+          heroSeen = true;
+          try { sessionStorage.setItem('heroSeen', '1'); } catch(e) {}
+          document.documentElement.classList.add('hero-done');
+        }
+
+        // 99%+ — lock the runway out permanently
+        // Never trigger from a resize event: mobile keyboards shrink vh,
+        // which can push scrollY/vh above 0.99 even when the user hasn't
+        // actually scrolled to the bottom of the hero.
+        if (raw >= 0.99 && !fromResize) lockRunway();
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(applyDissolve);
+          ticking = true;
+        }
+      }
+
+      function onResize() {
+        if (!ticking) {
+          // Pass fromResize=true so lockRunway is never triggered by resize
+          requestAnimationFrame(() => applyDissolve(true));
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize, { passive: true });
+      applyDissolve(); // catch mid-scroll reloads
+    })();
+
+    /* ─────────────────────────────────────────────
+       CMS GALLERY LOADER
+       Photos → data/gallery.json  |  Videos → data/videos.json
+       Edit content at yoursite.com/admin
+    ───────────────────────────────────────────── */
+    function renderPhotos(photos) {
+      const grid = document.getElementById('photoGrid');
+      if (!grid || !photos || photos.length === 0) return;
+      grid.innerHTML = '';
+      photos.forEach((photo, i) => {
+        const div      = document.createElement('div');
+        div.className  = 'photo-item reveal';
+        div.dataset.cat = photo.category || 'all';
+        div.style.height = (photo.height || 320) + 'px';
+        div.setAttribute('tabindex', '0');
+        div.setAttribute('role', 'button');
+        div.setAttribute('aria-label', 'Photo: ' + (photo.caption || ''));
+        div.onclick    = () => openLb(i);
+        div.onkeydown  = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(i); } };
+
+        const img      = document.createElement('img');
+        img.src        = photo.image;
+        img.alt        = photo.caption || '';
+        img.loading    = 'lazy';
+
+        const overlay  = document.createElement('div');
+        overlay.className = 'photo-overlay';
+        overlay.setAttribute('aria-hidden', 'true');
+        const cap      = document.createElement('span');
+        cap.className  = 'photo-cap';
+        cap.textContent = photo.caption || '';
+        overlay.appendChild(cap);
+
+        div.appendChild(img);
+        div.appendChild(overlay);
+        grid.appendChild(div);
+      });
+      scheduleReveal();
+    }
+
+    function renderVideos(videos) {
+      const grid = document.getElementById('videoGrid');
+      if (!grid || !videos || videos.length === 0) return;
+      grid.innerHTML = '';
+      videos.forEach(video => {
+        const item     = document.createElement('div');
+        item.className = 'video-item reveal-scale';
+
+        const embed    = document.createElement('div');
+        embed.className = 'video-embed';
+
+        const iframe   = document.createElement('iframe');
+        iframe.src     = video.url || '';
+        iframe.title   = video.title || 'Video';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        embed.appendChild(iframe);
+
+        const meta     = document.createElement('div');
+        meta.className = 'video-meta';
+
+        const type     = document.createElement('p');
+        type.className = 'video-type';
+        type.textContent = video.type || '';
+
+        const title    = document.createElement('h3');
+        title.className = 'video-title';
+        title.textContent = video.title || '';
+
+        meta.appendChild(type);
+        meta.appendChild(title);
+        item.appendChild(embed);
+        item.appendChild(meta);
+        grid.appendChild(item);
+      });
+      scheduleReveal();
+    }
+
+    async function loadGallery() {
+      try {
+        const [gRes, vRes] = await Promise.all([
+          fetch('/data/gallery.json'),
+          fetch('/data/videos.json')
+        ]);
+        if (gRes.ok) {
+          const g = await gRes.json();
+          if (g.photos && g.photos.length) renderPhotos(g.photos);
+        }
+        if (vRes.ok) {
+          const v = await vRes.json();
+          if (v.videos && v.videos.length) renderVideos(v.videos);
+        }
+      } catch (e) {
+        // Silently fail — expected on local file:// dev. Grids stay empty
+        // until content is added via the CMS admin panel.
+        console.info('[RIF] Gallery data not fetched (expected in local dev):', e.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadGallery);
+
+    /* ─────────────────────────────────────────────
+       PHOTO CATEGORY FILTER
+    ───────────────────────────────────────────── */
+    function filterCat(btn) {
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('cat-active'));
+      btn.classList.add('cat-active');
+
+      document.querySelectorAll('.photo-item').forEach((item, i) => {
+        const show = (cat === 'all') || (item.dataset.cat === cat);
+        item.classList.toggle('cat-hidden', !show);
+        if (show) {
+          item.style.animationDelay = (i * 0.04) + 's';
+          item.style.animation = 'none';
+          requestAnimationFrame(() => { item.style.animation = ''; });
+        }
+      });
+      scheduleReveal();
+    }
+
+    /* ─────────────────────────────────────────────
+       LIGHTBOX
+    ───────────────────────────────────────────── */
+    let lbOpen  = false;
+    let lbIndex = 0;
+    let lbItems = [];
+
+    function buildLbItems() {
+      lbItems = [];
+      document.querySelectorAll('#photoGrid .photo-item:not(.cat-hidden) img').forEach(img => {
+        lbItems.push({ src: img.src, alt: img.alt || '' });
+      });
+    }
+
+    function openLb(index) {
+      buildLbItems();
+      if (!lbItems.length) return;
+      lbIndex = index;
+      setLbImg(lbIndex);
+      document.getElementById('lightbox').classList.add('lb-open');
+      document.body.style.overflow = 'hidden';
+      lbOpen = true;
+      document.getElementById('lbClose').focus();
+    }
+
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('lb-open');
+      document.body.style.overflow = '';
+      lbOpen = false;
+    }
+
+    function lbStep(dir) {
+      lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
+      setLbImg(lbIndex);
+    }
+
+    function setLbImg(i) {
+      const lb   = document.getElementById('lbImg');
+      const item = lbItems[i];
+      lb.style.opacity = '0';
+      setTimeout(() => {
+        lb.src = item.src;
+        lb.alt = item.alt;
+        lb.style.opacity = '1';
+        lb.style.transition = 'opacity 0.2s ease';
+      }, 100);
+      document.getElementById('lbCaption').textContent = item.alt;
+      document.getElementById('lbCounter').textContent = (i + 1) + ' / ' + lbItems.length;
+    }
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLb();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lbOpen) return;
+      if (e.key === 'ArrowLeft')  lbStep(-1);
+      if (e.key === 'ArrowRight') lbStep(1);
+    });
+
+    /* ─────────────────────────────────────────────
+       CHIP SELECTOR
+    ───────────────────────────────────────────── */
+    /* ─────────────────────────────────────────────
+       TURNAROUND DATA
+       standard / rush per service type.
+       Rush label is shown in gold in the info panel
+       and acts as the upsell hook.
+    ───────────────────────────────────────────── */
+    // Rush timelines shown as a hint in the info panel
+    const TURNAROUND = {
+      'photography':    { std: '2–4 weeks',  rush: '3–5 days'  },
+      'event-coverage': { std: '1–2 weeks',  rush: '48 hours'  },
+      'reel':           { std: '3–5 weeks',  rush: '1–2 weeks' },
+      'brand-film':     { std: '4–6 weeks',  rush: '2–3 weeks' },
+      'direction':      { std: '2–3 weeks',  rush: '1 week'    },
+      'church':         { std: '2–4 weeks',  rush: '1 week'    },
+      'unsure':         { std: '2–6 weeks',  rush: null        },
+    };
+
+    function updateTurnaround(svcVal) {
+      const data  = TURNAROUND[svcVal];
+      const stdEl = document.getElementById('bkTurnaround');
+      if (!data || !stdEl) return;
+      stdEl.innerHTML = '';
+      stdEl.appendChild(document.createTextNode(data.std));
+      if (data.rush) {
+        const hint = document.createElement('span');
+        hint.className   = 'bk-rush-hint';
+        hint.textContent = data.rush + ' with rush';
+        stdEl.appendChild(hint);
+      }
+      const rushRow = document.getElementById('bkRushRow');
+      if (rushRow) rushRow.style.display = 'none';
+    }
+
+    function pickChip(el, hiddenId) {
+      el.closest('.chip-wrap').querySelectorAll('.chip').forEach(c => {
+        c.classList.remove('chip-on');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      el.classList.add('chip-on');
+      el.setAttribute('aria-pressed', 'true');
+      document.getElementById(hiddenId).value = el.dataset.val;
+
+      // When a service chip is picked, update the turnaround info panel
+      if (hiddenId === 'svcVal') {
+        updateTurnaround(el.dataset.val);
+      }
+    }
+
+    document.querySelectorAll('.chip').forEach(c => {
+      c.setAttribute('aria-pressed', c.classList.contains('chip-on') ? 'true' : 'false');
+    });
+
+    /* ─────────────────────────────────────────────
+       BOOKING FORM — Formsubmit.co AJAX submission
+       Sends to ronniewiththecam@outlook.com.
+       Activate once: submit the form yourself the
+       first time and click the link in the email
+       Formsubmit sends to your inbox.
+    ───────────────────────────────────────────── */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form    = document.getElementById('bookingForm');
+      const btn     = document.getElementById('submitBtn');
+      const success = document.getElementById('formSuccess');
+      const fname   = form.fname.value.trim();
+      const email   = form.email.value.trim();
+      const service = document.getElementById('svcVal').value;
+
+      if (!fname || !email || !service) {
+        btn.style.animation = 'none';
+        void btn.offsetWidth;
+        btn.style.animation = 'btnShake 0.42s ease';
+        btn.focus();
+        return;
+      }
+
+      btn.textContent = 'Sending…';
+      btn.disabled    = true;
+
+      fetch(form.action, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json' },
+        body:    new FormData(form)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success === 'true' || data.success === true) {
+          form.style.display    = 'none';
+          success.style.display = 'block';
+          success.focus();
+        } else {
+          btn.textContent = 'Send Inquiry →';
+          btn.disabled    = false;
+          alert('Something went wrong. Please try again or reach out on Instagram.');
+        }
+      })
+      .catch(() => {
+        btn.textContent = 'Send Inquiry →';
+        btn.disabled    = false;
+        alert('Something went wrong. Please try again or reach out on Instagram.');
+      });
+    }
+
+    /* ─────────────────────────────────────────────
+       AVAILABILITY DOT — auto amber if not "Available"
+    ───────────────────────────────────────────── */
+    (function() {
+      const dot  = document.querySelector('.avail-dot');
+      const text = document.querySelector('.avail-text');
+      if (dot && text && text.textContent.trim() !== 'Available') {
+        dot.classList.add('avail-dot--busy');
+      }
+    })();
+
+    /* ─────────────────────────────────────────────
+       HEADER HEIGHT → CSS VAR
+       Keeps bk-left sticky top clear of site-header
+       on every viewport size.
+    ───────────────────────────────────────────── */
+    (function() {
+      const hdr = document.querySelector('.site-header');
+      function setHdrH() {
+        if (hdr) document.documentElement.style.setProperty(
+          '--hdr-h', hdr.getBoundingClientRect().height + 'px'
+        );
+      }
+      setHdrH();
+      window.addEventListener('resize', setHdrH, { passive: true });
+    })();
+
+    /* Keyframes injected dynamically */
+    (function() {
+      const s = document.createElement('style');
+      s.textContent = `
+        @keyframes btnShake {
+          0%,100% { transform: translateX(0); }
+          20%     { transform: translateX(-6px); }
+          40%     { transform: translateX(6px); }
+          60%     { transform: translateX(-4px); }
+          80%     { transform: translateX(4px); }
+        }
+      `;
+      document.head.appendChild(s);
+    })();
+  </script>
+  </div><!-- /.page-wrap -->
+
+  <!-- Netlify Identity: redirect to /admin after login -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function(user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function() {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
